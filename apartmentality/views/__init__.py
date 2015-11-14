@@ -30,11 +30,13 @@ class APIResource(Resource):
         self.children = {
             "users": UserDispatcher,
             "properties": PropertyDispatcher,
+            "managers": ManagerDispatcher,
         }
 
 
 from apartmentality.views.user import UserDispatcher
 from apartmentality.views.property import PropertyDispatcher
+from apartmentality.views.manager import ManagerDispatcher
 
 
 @view_config(context=APIResource, request_method="GET", renderer="api")
