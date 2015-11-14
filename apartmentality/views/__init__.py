@@ -29,10 +29,12 @@ class APIResource(Resource):
         super().__init__(request)
         self.children = {
             "users": UserDispatcher,
+            "properties": PropertyDispatcher,
         }
 
 
 from apartmentality.views.user import UserDispatcher
+from apartmentality.views.property import PropertyDispatcher
 
 
 @view_config(context=APIResource, request_method="GET", renderer="api")
