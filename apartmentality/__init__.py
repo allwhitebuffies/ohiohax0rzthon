@@ -19,13 +19,13 @@ def main(global_config, **settings):
 
 
 class APIRendererFactory(object):
-    _flat_types = [
+    _flat_types = (
         type(None),
         int,
         float,
         bool,
         str,
-    ]
+    )
 
     @classmethod
     def flatten_obj(cls, obj):

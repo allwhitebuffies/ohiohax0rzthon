@@ -1,3 +1,6 @@
+from pyramid.view import view_config
+
+
 class Resource(object):
     """Base resource class.
     """
@@ -17,7 +20,7 @@ class RootResource(Resource):
     def __init__(self, request):
         super().__init__(request)
         self.children = {
-
+            "api": APIResource,
         }
 
 
@@ -25,4 +28,16 @@ class APIResource(Resource):
     def __init__(self, request):
         super().__init__(request)
         self.children = {
+            "users": UserDispatcher,
         }
+
+
+from apartmentality.views.user import UserDispatcher
+
+
+@view_config(context=APIResource, request_method="GET", renderer="api")
+def api_index(context, request):
+    return {
+        "hello": [1, 2, True, False, None, 2.3, "yay"],
+        "key": {"key": "value"},
+    }
