@@ -10,13 +10,17 @@ with open(os.path.join(here, 'CHANGES.txt')) as f:
 
 requires = [
     'pyramid',
-    'pyramid_chameleon',
+    'pyramid_jinja2',
     'pyramid_debugtoolbar',
+    'sqlalchemy',
+    'zope.sqlalchemy',
+    'pyramid_tm',
+    'psycopg2',
     'waitress',
     ]
 
 setup(name='housessment',
-      version='0.0',
+      version='0.0.0',
       description='housessment',
       long_description=README + '\n\n' + CHANGES,
       classifiers=[
@@ -35,8 +39,9 @@ setup(name='housessment',
       install_requires=requires,
       tests_require=requires,
       test_suite="housessment",
-      entry_points="""\
-      [paste.app_factory]
-      main = housessment:main
-      """,
+      entry_points={
+          "paste.app_factory": [
+              "main = housessment:main",
+              ],
+          },
       )
