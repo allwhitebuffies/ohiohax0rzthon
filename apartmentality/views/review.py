@@ -2,7 +2,6 @@ from pyramid.traversal import find_interface
 from pyramid.view import view_config
 from sqlalchemy.orm import eagerload, defaultload
 from sqlalchemy.orm.strategy_options import Load
-
 from apartmentality.database import DBSession
 from apartmentality.models.manager import Manager
 from apartmentality.models.review import Review
@@ -44,6 +43,30 @@ class ReviewResource(Resource):
 
         self.property_id = property_resource.property_id
         self.user_id = user_id
+
+
+@view_config(context=ReviewDispatcher, containment=APIResource,
+             request_method="GET", renderer="api")
+def api_review_list(context, request):
+    q = DBSession.query(Review)
+    q = q.filter(
+        Review.property_id == context.__parent__.property_id,
+    )
+
+    q = q.options(
+        Load(Review).joinedload(Review.property),
+        Load(Review).joinedload(Review.user),
+        Load(Review).defaultload(Review.user).joinedload(User.person),
+        Load(Review).joinedload(Review.manager),
+        Load(Review).defaultload(Review.manager).joinedload(Manager.company),
+        Load(Review).defaultload(Review.manager).joinedload(Manager.person),
+    )
+
+    q = q.order_by(Review.end_date.desc())
+
+    reviews = q.all()
+
+    return reviews
 
 
 @view_config(context=ReviewResource, containment=APIResource,
