@@ -32,3 +32,7 @@ def configure_database(url):
 
     engine = create_engine(url)
     session_factory.configure(bind=engine)
+    Base.metadata.create_all(bind=engine)
+
+
+from apartmentality import models

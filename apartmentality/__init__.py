@@ -1,13 +1,17 @@
 import datetime
 import json
-
 from pyramid.config import Configurator
+
+from apartmentality.database import configure_database
 
 
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
     """
     config = Configurator(settings=settings)
+
+    configure_database(settings["sqlalchemy.url"])
+
     config.add_static_view('static', 'static', cache_max_age=3600)
 
     config.set_root_factory("apartmentality.views:RootResource")
