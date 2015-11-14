@@ -1,6 +1,6 @@
-from sqlalchemy.sql.schema import Column
+from sqlalchemy.orm import relationship
+from sqlalchemy.sql.schema import Column, ForeignKey
 from sqlalchemy.sql.sqltypes import Integer, String
-
 from apartmentality.database import Base
 
 
@@ -14,3 +14,9 @@ class Manager(Base):
     city = Column(String(50))
     state = Column(String(50))
     zip = Column(Integer)
+
+    company_id = Column(ForeignKey("companies.id"))
+    person_id = Column(ForeignKey("people.id"))
+
+    company = relationship("Company")
+    person = relationship("Person")

@@ -1,7 +1,6 @@
 from sqlalchemy.orm import relationship
-from sqlalchemy.sql.expression import and_
 from sqlalchemy.sql.schema import Column, ForeignKey
-from sqlalchemy.sql.sqltypes import DateTime, Integer
+from sqlalchemy.sql.sqltypes import DateTime, Integer, String
 
 from apartmentality.database import Base
 
@@ -11,6 +10,8 @@ class Review(Base):
 
     user_id = Column(ForeignKey("users.id"), primary_key=True)
     property_id = Column(ForeignKey("properties.id"), primary_key=True)
+
+    unit = Column(String(50))
     start_date = Column(DateTime, index=True)
     end_date = Column(DateTime, index=True)
 

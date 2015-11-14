@@ -1,6 +1,5 @@
 from sqlalchemy.sql.schema import Column
 from sqlalchemy.sql.sqltypes import Integer, String
-
 from apartmentality.database import Base
 
 
@@ -14,4 +13,3 @@ class Property(Base):
     street_number = Column(Integer, index=True)
     street_name = Column(String(50), index=True)
     type = Column(String(50), index=True)
-    unit = Column(String(50), index=True)
