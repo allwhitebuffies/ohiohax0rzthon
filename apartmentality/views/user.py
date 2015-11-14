@@ -47,4 +47,6 @@ def api_user(context, request):
 
     user = q.one()
 
+    # TODO: remove hash/salt/email
+
     return user

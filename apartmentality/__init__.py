@@ -1,7 +1,6 @@
 import datetime
 import json
 from pyramid.config import Configurator
-
 from apartmentality.database import configure_database
 
 
@@ -63,11 +62,15 @@ class APIRendererFactory(object):
         elif isinstance(obj, object):
             val = {}
             for sub_key, sub_obj in obj.__dict__.items():
-                if not isinstance(sub_obj, cls._flat_types):
-                    continue
+                # if not isinstance(sub_obj, cls._flat_types):
+                #    continue
                 if sub_key[0] == "_":
                     continue
-                val[sub_key] = sub_obj
+
+                try:
+                    val[sub_key] = cls.flatten_obj(sub_obj)
+                except TypeError:
+                    pass
         else:
             raise TypeError(obj)
 
@@ -81,5 +84,11 @@ class APIRendererFactory(object):
         request.response.content_type = "application/json"
 
         val = self.flatten_obj(value)
-        val_str = json.dumps(val, indent=4, sort_keys=True)
+
+        wrapped = {
+            "api_version": "0.0.0",
+            "data": val,
+        }
+
+        val_str = json.dumps(wrapped, indent=4, sort_keys=True)
         return val_str
