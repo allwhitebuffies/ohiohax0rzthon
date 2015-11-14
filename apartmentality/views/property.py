@@ -40,8 +40,6 @@ def api_property(context, request):
     q = DBSession.query(Property)
     q = q.filter(Property.id == context.property_id)
 
-    # q = q.options(eagerload(Property.))
-
     property = q.one()
 
     return property

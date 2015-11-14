@@ -10,6 +10,7 @@ class Review(Base):
 
     user_id = Column(ForeignKey("users.id"), primary_key=True)
     property_id = Column(ForeignKey("properties.id"), primary_key=True)
+    manager_id = Column(ForeignKey("managers.id"))
 
     unit = Column(String(50))
     start_date = Column(DateTime, index=True)
@@ -23,5 +24,6 @@ class Review(Base):
     rating_area = Column(Integer, index=True)
     rating_average = Column(Integer, index=True)
 
-    user = relationship("User")
-    property = relationship("Property")
+    user = relationship("User", backref="reviews")
+    property = relationship("Property", backref="reviews")
+    manager = relationship("Manager", backref="properties")
