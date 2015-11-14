@@ -1,6 +1,9 @@
+from pyramid.view import view_config
+from sqlalchemy.orm import eagerload
+
 from apartmentality.database import DBSession
 from apartmentality.models.user import User
-from apartmentality.views import Resource
+from apartmentality.views import Resource, APIResource
 
 
 class UserDispatcher(Resource):
@@ -32,4 +35,16 @@ class UserResource(Resource):
             raise KeyError(user_id)
 
         self.user_id = user_id
-        
+
+
+@view_config(context=UserResource, containment=APIResource,
+             request_method="GET", renderer="api")
+def api_user(context, request):
+    q = DBSession.query(User)
+    q = q.filter(User.id == context.user_id)
+
+    q = q.options(eagerload(User.person))
+
+    user = q.one()
+
+    return user
