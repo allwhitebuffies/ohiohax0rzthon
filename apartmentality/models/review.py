@@ -1,3 +1,5 @@
+from sqlalchemy.orm import relationship
+from sqlalchemy.sql.expression import and_
 from sqlalchemy.sql.schema import Column, ForeignKey
 from sqlalchemy.sql.sqltypes import DateTime, Integer
 
@@ -19,3 +21,6 @@ class Review(Base):
     rating_bathroom = Column(Integer, index=True)
     rating_area = Column(Integer, index=True)
     rating_average = Column(Integer, index=True)
+
+    user = relationship("User")
+    property = relationship("Property")
