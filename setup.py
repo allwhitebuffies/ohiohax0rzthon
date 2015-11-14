@@ -19,9 +19,9 @@ requires = [
     'waitress',
     ]
 
-setup(name='housessment',
+setup(name='apartmentality',
       version='0.0.0',
-      description='housessment',
+      description='apartmentality',
       long_description=README + '\n\n' + CHANGES,
       classifiers=[
         "Programming Language :: Python",
@@ -38,10 +38,10 @@ setup(name='housessment',
       zip_safe=False,
       install_requires=requires,
       tests_require=requires,
-      test_suite="housessment",
+      test_suite="apartmentality",
       entry_points={
           "paste.app_factory": [
-              "main = housessment:main",
+              "main = apartmentality:main",
               ],
           },
       )
