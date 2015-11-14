@@ -10,6 +10,8 @@ class Person(Base):
     """Represents a person.
     """
 
+    __tablename__ = "people"
+
     id = Column(Integer, primary_key=True)
     first_name = Column(String(50))
     middle_initial = Column(String(1))
