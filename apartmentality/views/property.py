@@ -17,6 +17,9 @@ class PropertyDispatcher(Resource):
 class PropertyResource(Resource):
     def __init__(self, request, property_id):
         super().__init__(request)
+        self.children = {
+            "reviews": ReviewDispatcher,
+        }
 
         try:
             id_int = int(property_id)
@@ -32,6 +35,9 @@ class PropertyResource(Resource):
             raise KeyError(property_id)
 
         self.property_id = id_int
+
+
+from apartmentality.views.review import ReviewDispatcher
 
 
 @view_config(context=PropertyResource, containment=APIResource,
