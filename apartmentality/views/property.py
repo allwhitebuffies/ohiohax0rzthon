@@ -1,7 +1,9 @@
 from pyramid.view import view_config
 from sqlalchemy.orm import eagerload
-
+from sqlalchemy.orm.strategy_options import Load
+from sqlalchemy.sql.functions import func
 from apartmentality.database import DBSession
+from apartmentality.models.manager import Manager
 from apartmentality.models.property import Property
 from apartmentality.views import Resource, APIResource
 
@@ -38,6 +40,36 @@ class PropertyResource(Resource):
 
 
 from apartmentality.views.review import ReviewDispatcher
+
+
+@view_config(context=PropertyDispatcher, containment=APIResource,
+             request_method="GET", renderer="api")
+def api_property_search(context, request):
+    street_number = request.GET.get("street_number")
+    street_name = request.GET.get("street_name")
+    city = request.GET.get("city")
+    state = request.GET.get("state")
+    zip = request.GET.get("zip")
+
+    q = DBSession.query(Property)
+
+    if street_number is not None:
+        q = q.filter(Property.street_number == int(street_number))
+
+    if street_name is not None:
+        q = q.filter(func.lower(Property.street_name).like("%%%s%%" %
+                                                           street_name.lower()))
+
+    if city is not None:
+        q = q.filter(func.lower(Property.city).like("%%%s%%" % city.lower()))
+
+    if state is not None:
+        q = q.filter(func.lower(Property.state).like("%%%s%%" % state.lower()))
+
+    if zip is not None:
+        q = q.filter(Property.zip == zip)
+
+    return list(q.all())
 
 
 @view_config(context=PropertyResource, containment=APIResource,
