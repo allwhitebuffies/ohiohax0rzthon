@@ -60,3 +60,8 @@ def api_manager(context, request):
     manager = q.one()
 
     return manager
+
+@view_config(context=ManagerResource, request_method="GET",
+             renderer="manager.html")
+def html_manager(context, request):
+    return api_manager(context, request)
