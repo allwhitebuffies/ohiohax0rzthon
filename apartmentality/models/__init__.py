@@ -5,4 +5,5 @@ from apartmentality.models import (
     tag,
     review,
     user,
+    photo,
 )
