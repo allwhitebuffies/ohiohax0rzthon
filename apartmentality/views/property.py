@@ -5,6 +5,8 @@ from sqlalchemy.sql.functions import func
 from apartmentality.database import DBSession
 from apartmentality.models.manager import Manager
 from apartmentality.models.property import Property
+from apartmentality.models.review import Review
+from apartmentality.models.tag import Tag
 from apartmentality.views import Resource, APIResource
 
 
@@ -104,5 +106,15 @@ def api_property(context, request):
     q = q.filter(Property.id == context.property_id)
 
     property = q.one()
+
+    q = DBSession.query(Tag.name, func.count(Tag.id))
+    q = q.select_from(Review)
+    q = q.join(Review.tags)
+    q = q.filter(Review.property_id == property.id)
+    q = q.group_by(Tag.id)
+    q = q.order_by(func.count(Tag.id).desc())
+    q = q.limit(5)
+
+    property.top_tags = q.all()
 
     return property

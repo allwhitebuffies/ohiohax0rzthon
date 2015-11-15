@@ -1,15 +1,26 @@
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql.expression import and_
 from sqlalchemy.sql.schema import Column, ForeignKey, UniqueConstraint, \
     ForeignKeyConstraint
 from sqlalchemy.sql.sqltypes import DateTime, Integer, String, Text
 from apartmentality.database import Base
+from apartmentality.models.tag import Tag
+
+
+class ReviewTag(Base):
+    __tablename__ = "review_tags"
+    __table_args__ = (
+        ForeignKeyConstraint(["property_id", "user_id"],
+                             ["reviews.property_id", "reviews.user_id"]),
+    )
+
+    tag_id = Column(ForeignKey("tags.id"), primary_key=True)
+    property_id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, primary_key=True)
 
 
 class Review(Base):
     __tablename__ = "reviews"
-    __table_args__ = (
-        UniqueConstraint("property_id", "user_id", name="ukey"),
-    )
 
     user_id = Column(ForeignKey("users.id"), primary_key=True)
     property_id = Column(ForeignKey("properties.id"), primary_key=True)
@@ -32,17 +43,14 @@ class Review(Base):
     property = relationship("Property", backref="reviews")
     manager = relationship("Manager", backref="properties")
 
-    tags = relationship("ReviewTag", secondary="review_tags")
-
-
-class ReviewTag(Base):
-    __tablename__ = "review_tags"
-    __table_args__ = (
-        UniqueConstraint("property_id", "user_id"),
-        ForeignKeyConstraint(["property_id", "user_id"],
-                             ["reviews.property_id", "reviews.user_id"]),
+    tags = relationship(
+        "Tag",
+        secondary=ReviewTag.__table__,
+        primaryjoin=and_(
+            user_id == ReviewTag.user_id,
+            property_id == ReviewTag.property_id,
+        ),
+        secondaryjoin=and_(
+            ReviewTag.tag_id == Tag.id,
+        )
     )
-
-    tag_id = Column(ForeignKey("tags.id"), primary_key=True)
-    property_id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, primary_key=True)
