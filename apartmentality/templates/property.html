@@ -23,6 +23,9 @@
         Manager: <a
             href="/managers/{{review.manager_id}}">{{ review.manager.name
         }}</a>
+
+        <br/><br/>
+        {{review.text}}
     </li>
     {% endfor %}
 </ul>
@@ -77,6 +80,7 @@
 
         }
     });
+
 
 
 
