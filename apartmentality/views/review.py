@@ -146,6 +146,7 @@ def api_create_review(context, request):
     review.manager = manager
     review.rating_kitchen = rating_kitchen
     review.rating_bathroom = rating_bathroom
+    review.rating_bedroom = rating_bedroom
     review.rating_area = rating_area
     review.rating_average = rating_avg
 
