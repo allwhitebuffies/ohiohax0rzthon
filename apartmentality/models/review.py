@@ -1,7 +1,6 @@
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql.schema import Column, ForeignKey
-from sqlalchemy.sql.sqltypes import DateTime, Integer, String
-
+from sqlalchemy.sql.sqltypes import DateTime, Integer, String, Text
 from apartmentality.database import Base
 
 
@@ -13,8 +12,7 @@ class Review(Base):
     manager_id = Column(ForeignKey("managers.id"))
 
     unit = Column(String(50))
-    start_date = Column(DateTime, index=True)
-    end_date = Column(DateTime, index=True)
+    date = Column(DateTime, index=True)
 
     rent = Column(Integer)
 
@@ -23,6 +21,8 @@ class Review(Base):
     rating_bathroom = Column(Integer, index=True)
     rating_area = Column(Integer, index=True)
     rating_average = Column(Integer, index=True)
+
+    text = Column(Text)
 
     user = relationship("User", backref="reviews")
     property = relationship("Property", backref="reviews")

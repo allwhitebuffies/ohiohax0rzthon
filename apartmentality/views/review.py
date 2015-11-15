@@ -1,7 +1,11 @@
+import datetime
+
 from pyramid.traversal import find_interface
 from pyramid.view import view_config
 from sqlalchemy.orm import eagerload, defaultload
 from sqlalchemy.orm.strategy_options import Load
+from sqlalchemy.sql.functions import func
+
 from apartmentality.database import DBSession
 from apartmentality.models.manager import Manager
 from apartmentality.models.review import Review
@@ -91,22 +95,67 @@ def api_review(context, request):
 
     return review
 
+
 def api_create_review(context, request):
     property_id = context.property_id
     user_id = request.cookies.get("user_id")
 
+    manager = request.json_body.get("manager")
+    rating_kitchen = request.json_body.get("rating_kitchen")
+    rating_bedroom = request.json_body.get("rating_bedroom")
+    rating_bathroom = request.json_body.get("rating_bathroom")
+    rating_area = request.json_body.get("rating_area")
+    rent = request.json_body.get("rent")
+
+    avg_sum = 0
+    avg_total = 0
+
+    if rating_kitchen is not None:
+        avg_sum += rating_kitchen
+        avg_total += 1
+    if rating_bedroom is not None:
+        avg_sum += rating_bedroom
+        avg_total += 1
+    if rating_bathroom is not None:
+        avg_sum += rating_bathroom
+        avg_total += 1
+    if rating_area is not None:
+        avg_sum += rating_area
+        avg_total += 1
+
+    if avg_total > 0:
+        rating_avg = avg_sum / avg_total
+    else:
+        rating_avg = None
+
+    text = request.json_body.get("text")
 
     q = DBSession.query(Manager)
-    q = q.outerjoin(Manager.company)
-    q = q.outerjoin(Manager.person)
+    q = q.filter(func.lower(Manager.name).like("%%%s%%" % manager.lower()))
 
-    if name is not None:
-        q = q.filter(or_(
-            func.lower(Company.name).like("%%%s%%" % name.lower()),
-            func.lower(Person.last_name).like("%%%s%%" % name.lower()),
-            # TODO: full name search
-        ))
+    manager = q.scalar()
 
+    if manager is None:
+        manager = Manager()
+        manager.name = manager
+        DBSession.add(manager)
+        DBSession.flush()
 
     review = Review()
+    review.user_id = user_id
     review.property_id = property_id
+    review.manager = manager
+    review.rating_kitchen = rating_kitchen
+    review.rating_bathroom = rating_bathroom
+    review.rating_area = rating_area
+    review.rating_average = rating_avg
+
+    review.rent = rent
+
+    review.text = text
+    review.date = datetime.datetime.now()
+
+    DBSession.add(review)
+    DBSession.flush()
+
+    return {}

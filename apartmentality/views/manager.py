@@ -4,7 +4,6 @@ from sqlalchemy.sql.expression import or_
 from sqlalchemy.sql.functions import func
 
 from apartmentality.database import DBSession
-from apartmentality.models.company import Company
 from apartmentality.models.manager import Manager
 from apartmentality.models.person import Person
 from apartmentality.views import Resource, APIResource
