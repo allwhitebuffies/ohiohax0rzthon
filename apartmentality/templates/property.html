@@ -54,7 +54,7 @@
             var rating_area = $("#rating_area").val();
             var manager = $("#manager").val();
 
-            var text = $("#comment").html()
+            var text = $("#comment").val()
 
             var data = {
                 manager: manager,
@@ -63,6 +63,7 @@
                 rating_bedroom: rating_bedroom,
                 rating_area: rating_area,
                 rent: $("#rent").val(),
+                text: text,
                 tag_ids: []
             };
 
@@ -71,7 +72,7 @@
                 data: JSON.stringify(data),
                 dataType: "json",
                 success: function(data) {
-                    location.reload();
+                    location.href = "/properties/" + propertyId;
                 },
                 processData: false,
                 type: "POST",

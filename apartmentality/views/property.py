@@ -71,7 +71,7 @@ def api_property_search(context, request):
     if zip is not None:
         q = q.filter(Property.zip == zip)
 
-    q = q.limit(10)
+    q = q.limit(7)
 
     return list(q.all())
 
