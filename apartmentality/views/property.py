@@ -53,7 +53,7 @@ def api_property_search(context, request):
     state = request.GET.get("state")
     zip = request.GET.get("zip")
 
-    q = DBSession.query(Property)
+    q = DBSession.query(Property, func.avg(Review.rating_average))
 
     if street_number is not None:
         q = q.filter(Property.street_number == int(street_number))
@@ -71,9 +71,21 @@ def api_property_search(context, request):
     if zip is not None:
         q = q.filter(Property.zip == zip)
 
+    q = q.outerjoin(Property.reviews)
+    q = q.group_by(Property.id)
+
     q = q.limit(7)
 
-    return list(q.all())
+    results = []
+
+    for property, avg in q.all():
+        if avg is not None:
+            property.overall = int(avg)
+        else:
+            property.overall = None
+        results.append(property)
+
+    return results
 
 
 @view_config(context=PropertyDispatcher, request_method="GET",

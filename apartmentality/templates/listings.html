@@ -17,7 +17,16 @@
                             .street_name}}, {{result.city}}, {{result
                             .state}} {{result.zip}}</h3>
 
-                        <p>...</p>
+                        {% if result.overall is not none %}
+                        <p>
+                            {% for i in range(0, result.overall) %}
+                            <i class="glyphicon glyphicon-star"></i>
+                            {% endfor %}{% for i in range(0,
+                            5 - result.overall) %}
+                            <i class="glyphicon glyphicon-star-empty"></i>
+                            {% endfor %}
+                        </p>
+                        {% endif %}
 
                         <p><a href="/properties/{{result.id}}"
                               class="btn btn-primary" role="button">Read
