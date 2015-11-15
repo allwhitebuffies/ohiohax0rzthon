@@ -3,67 +3,35 @@
 {% block title %}It's the lease you can do{% endblock %}
 
 {% block page_content %}
-    <section class="bg-primary">
-        <div class="container" >
-            <div class="row">
-    <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-            <img src="http://www.online-image-editor.com//styles/2014/images/example_image.png"
-                 alt="...">
+<section class="bg-primary">
+    <div class="container">
+        <div class="row">
+            {% for result in results %}
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="/img/house-{{ result.id % 10 }}.jpg"
+                         alt="...">
 
-            <div class="caption">
-                <h3>Thumbnail label</h3>
+                    <div class="caption">
+                        <h3>{{result.street_address}} {{result
+                            .street_name}}, {{result.city}}, {{result
+                            .state}} {{result.zip}}</h3>
 
-                <p>...</p>
+                        <p>...</p>
 
-                <p><a href="#" class="btn btn-primary" role="button">Read
-                    reviews</a> <a href="#" class="btn btn-default"
-                                   role="button">Rate</a></p>
+                        <p><a href="/properties/{{result.id}}"
+                              class="btn btn-primary" role="button">Read
+                            reviews</a> <a href="/properties/{{result.id}}" class="btn btn-default"
+                                           role="button">Rate</a></p>
+                    </div>
+                </div>
+
             </div>
+            {% endfor %}
         </div>
 
     </div>
-    <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-            <img src="https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg"
-                 alt="...">
-
-            <div class="caption">
-                <h3>Thumbnail label</h3>
-
-                <p>...</p>
-
-                <p><a href="#" class="btn btn-primary" role="button">Read
-                    reviews</a> <a href="#" class="btn btn-default"
-                                   role="button">Rate</a></p>
-            </div>
-        </div>
-
-    </div>
-    <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-            <img src="http://cdn.playbuzz.com/cdn/0079c830-3406-4c05-a5c1-bc43e8f01479/7dd84d70-768b-492b-88f7-a6c70f2db2e9.jpg"
-                 alt="...">
-
-            <div class="caption">
-                <h3>Thumbnail label</h3>
-
-                <p>...</p>
-
-                <p><a href="#" class="btn btn-primary" role="button">Read
-                    reviews</a> <a href="#" class="btn btn-default"
-                                   role="button">Rate</a></p>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-            
-        </div>
-    </section>
-
-
+</section>
 
 
 {% endblock %}
