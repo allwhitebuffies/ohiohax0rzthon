@@ -31,12 +31,14 @@ class APIResource(Resource):
             "users": UserDispatcher,
             "properties": PropertyDispatcher,
             "managers": ManagerDispatcher,
+            "tags": TagDispatcher,
         }
 
 
 from apartmentality.views.user import UserDispatcher
 from apartmentality.views.property import PropertyDispatcher
 from apartmentality.views.manager import ManagerDispatcher
+from apartmentality.views.tag import TagDispatcher
 
 
 @view_config(context=APIResource, request_method="GET", renderer="api")

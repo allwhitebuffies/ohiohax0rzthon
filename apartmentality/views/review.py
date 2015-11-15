@@ -9,6 +9,7 @@ from sqlalchemy.sql.functions import func
 from apartmentality.database import DBSession
 from apartmentality.models.manager import Manager
 from apartmentality.models.review import Review
+from apartmentality.models.tag import Tag
 from apartmentality.models.user import User
 from apartmentality.views import Resource, APIResource
 from apartmentality.views.property import PropertyResource
@@ -89,6 +90,7 @@ def api_review(context, request):
         Load(Review).joinedload(Review.manager),
         Load(Review).defaultload(Review.manager).joinedload(Manager.company),
         Load(Review).defaultload(Review.manager).joinedload(Manager.person),
+        Load(Review).subqueryload(Review.tags),
     )
 
     review = q.one()
@@ -108,6 +110,7 @@ def api_create_review(context, request):
     rating_bathroom = request.json_body.get("rating_bathroom")
     rating_area = request.json_body.get("rating_area")
     rent = request.json_body.get("rent")
+    tag_ids = request.json_body.get("tags")
 
     avg_sum = 0
     avg_total = 0
@@ -156,6 +159,14 @@ def api_create_review(context, request):
 
     review.text = text
     review.date = datetime.datetime.now()
+
+    for tag_id in tag_ids:
+        q = DBSession.query(Tag)
+        q = q.filter(Tag.id == tag_id)
+        tag = q.scalar()
+
+        if tag is not None:
+            review.tags.append(tag)
 
     DBSession.add(review)
     DBSession.flush()

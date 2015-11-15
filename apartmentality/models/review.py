@@ -1,11 +1,15 @@
 from sqlalchemy.orm import relationship
-from sqlalchemy.sql.schema import Column, ForeignKey
+from sqlalchemy.sql.schema import Column, ForeignKey, UniqueConstraint, \
+    ForeignKeyConstraint
 from sqlalchemy.sql.sqltypes import DateTime, Integer, String, Text
 from apartmentality.database import Base
 
 
 class Review(Base):
     __tablename__ = "reviews"
+    __table_args__ = (
+        UniqueConstraint("property_id", "user_id", name="ukey"),
+    )
 
     user_id = Column(ForeignKey("users.id"), primary_key=True)
     property_id = Column(ForeignKey("properties.id"), primary_key=True)
@@ -33,6 +37,12 @@ class Review(Base):
 
 class ReviewTag(Base):
     __tablename__ = "review_tags"
+    __table_args__ = (
+        UniqueConstraint("property_id", "user_id"),
+        ForeignKeyConstraint(["property_id", "user_id"],
+                             ["reviews.property_id", "reviews.user_id"]),
+    )
 
     tag_id = Column(ForeignKey("tags.id"), primary_key=True)
-    review_id = Column(ForeignKey("reviews.id"), primary_key=True)
+    property_id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, primary_key=True)
