@@ -115,6 +115,6 @@ def api_property(context, request):
     q = q.order_by(func.count(Tag.id).desc())
     q = q.limit(5)
 
-    property.top_tags = q.all()
+    property.top_tags ={r[0]: r[1] for r in q.all()}
 
     return property
