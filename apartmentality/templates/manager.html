@@ -1,9 +1,19 @@
 {% extends "base.html" %}
 
-{% block title %}View By Manager - {{ data["name"] }}{% endblock %}
+{% block title %}View By Manager - {{ manager.name }}{% endblock %}
 {% block page_content %}
 
-<h1>{{ data["name"] }}</h1>
+<h1>{{ manager.name }}</h1>
 
+<ul>
+    {% for property in properties %}
+    <li>
+        <a href="/properties/{{ property.id }}">{{ property.street_number }} {{
+            property.street_name }}, {{
+            property.city }}, {{ property.state }} {{ property.zip }}
+        </a>
+    </li>
+    {% endfor %}
+</ul>
 
 {% endblock %}

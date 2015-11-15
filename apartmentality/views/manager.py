@@ -2,10 +2,11 @@ from pyramid.view import view_config
 from sqlalchemy.orm.strategy_options import Load
 from sqlalchemy.sql.expression import or_
 from sqlalchemy.sql.functions import func
-
 from apartmentality.database import DBSession
 from apartmentality.models.manager import Manager
 from apartmentality.models.person import Person
+from apartmentality.models.property import Property
+from apartmentality.models.review import Review
 from apartmentality.views import Resource, APIResource
 
 
@@ -61,7 +62,17 @@ def api_manager(context, request):
 
     return manager
 
+
 @view_config(context=ManagerResource, request_method="GET",
              renderer="manager.html")
 def html_manager(context, request):
-    return {"data": api_manager(context, request)}
+    q = DBSession.query(Property)
+    q = q.join(Property.reviews)
+    q = q.filter(Review.manager_id == context.manager_id)
+
+    properties = q.distinct()
+
+    return {
+        "manager": api_manager(context, request),
+        "properties": properties,
+    }

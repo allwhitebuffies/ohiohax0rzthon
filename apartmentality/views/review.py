@@ -61,11 +61,9 @@ def api_review_list(context, request):
         Load(Review).joinedload(Review.user),
         Load(Review).defaultload(Review.user).joinedload(User.person),
         Load(Review).joinedload(Review.manager),
-        Load(Review).defaultload(Review.manager).joinedload(Manager.company),
-        Load(Review).defaultload(Review.manager).joinedload(Manager.person),
     )
 
-    q = q.order_by(Review.end_date.desc())
+    q = q.order_by(Review.date.desc())
 
     reviews = q.all()
 
@@ -86,8 +84,6 @@ def api_review(context, request):
         Load(Review).joinedload(Review.user),
         Load(Review).defaultload(Review.user).joinedload(User.person),
         Load(Review).joinedload(Review.manager),
-        Load(Review).defaultload(Review.manager).joinedload(Manager.company),
-        Load(Review).defaultload(Review.manager).joinedload(Manager.person),
         Load(Review).subqueryload(Review.tags),
     )
 

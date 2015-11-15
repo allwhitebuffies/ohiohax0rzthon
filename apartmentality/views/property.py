@@ -128,8 +128,6 @@ def html_property(context, request):
     dispatcher.__parent__ = context
 
     return {
-        "data": {
-            "property": api_property(context, request),
-            "reviews": api_review_list(dispatcher, request),
-        },
+        "property": api_property(context, request),
+        "reviews": api_review_list(dispatcher, request),
     }
