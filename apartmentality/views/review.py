@@ -96,6 +96,8 @@ def api_review(context, request):
     return review
 
 
+@view_config(context=ReviewDispatcher, containment=APIResource,
+             request_method="POST", renderer="api")
 def api_create_review(context, request):
     property_id = context.property_id
     user_id = request.cookies.get("user_id")
