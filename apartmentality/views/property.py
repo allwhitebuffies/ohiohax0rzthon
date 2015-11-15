@@ -71,9 +71,17 @@ def api_property_search(context, request):
     if zip is not None:
         q = q.filter(Property.zip == zip)
 
-    q = q.limit(10)
+    q = q.limit(7)
 
     return list(q.all())
+
+
+@view_config(context=PropertyDispatcher, request_method="GET",
+             renderer="listings.html")
+def html_property_search(context, request):
+    data = api_property_search(context, request)
+
+    return {"results": data}
 
 
 @view_config(context=PropertyDispatcher, containment=APIResource,
@@ -130,4 +138,5 @@ def html_property(context, request):
     return {
         "property": api_property(context, request),
         "reviews": api_review_list(dispatcher, request),
+        "photo": "/img/house-%d.jpg" % (context.property_id % 10),
     }

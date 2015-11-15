@@ -7,14 +7,89 @@
 
 <h1>{{property.street_number}} {{property.street_name}}</h1>
 
+<img src="{{photo}}"/>
+
 <h2>Reviews</h2>
 
 <ul>
     {% for review in reviews %}
     <li>
-        {{ review.user.person.first_name }}
+        User: {{ review.user.person.first_name }} <br/>
+        Bedrooms: {{ review.rating_bedroom }} <br/>
+        Bathroom: {{ review.rating_bathroom }} <br/>
+        Kitchen: {{ review.rating_kitchen }} <br/>
+        Area: {{ review.rating_area }} <br/>
+        Average: {{ review.rating_average }} <br/>
+        Manager: <a
+            href="/managers/{{review.manager_id}}">{{ review.manager.name
+        }}</a>
+
+        <br/><br/>
+        {{review.text}}
     </li>
     {% endfor %}
 </ul>
 
+<div>
+    <input type="number" id="rating_bedroom" class="rating"/>
+    <input type="number" id="rating_bathroom" class="rating"/>
+    <input type="number" id="rating_kitchen" class="rating"/>
+    <input type="number" id="rating_area" class="rating"/>
+    <input type="text" id="rent"/>
+    <input type="text" id="manager"/>
+    <textarea id="comment">
+
+    </textarea>
+    <input type="file" id="file"/>
+    <button class="submitBtn">Post</button>
+</div>
+
+<script>
+    var propertyId = "{{property.id}}";
+    document.addEventListener("click", function(e) {
+        if (e.target.className.indexOf("submitBtn") != -1) {
+            var rating_bedroom = $("#rating_bedroom").val();
+            var rating_bathroom = $("#rating_bathroom").val();
+            var rating_kitchen = $("#rating_kitchen").val();
+            var rating_area = $("#rating_area").val();
+            var manager = $("#manager").val();
+
+            var text = $("#comment").val()
+
+            var data = {
+                manager: manager,
+                rating_kitchen: rating_kitchen,
+                rating_bathroom: rating_bathroom,
+                rating_bedroom: rating_bedroom,
+                rating_area: rating_area,
+                rent: $("#rent").val(),
+                tag_ids: []
+            };
+
+            $.ajax({
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                dataType: "json",
+                success: function(data) {
+                    location.href = "/properties/" + propertyId;
+                },
+                processData: false,
+                type: "POST",
+                url: "/api/properties/" + propertyId + "/reviews"
+            });
+
+        }
+    });
+
+
+
+
+</script>
+
+
+{% endblock %}
+
+{% block end_scripts %}
+<script src="/js/bootstrap-rating-input.min.js" type="text/javascript">
+</script>
 {% endblock %}

@@ -9,6 +9,7 @@ def main(global_config, **settings):
     """
     config = Configurator(settings=settings)
     config.include("pyramid_jinja2")
+    config.include("pyramid_tm")
 
     config.add_jinja2_renderer(".html")
     config.add_jinja2_search_path("apartmentality:templates/", name=".html")
@@ -19,6 +20,7 @@ def main(global_config, **settings):
     config.add_static_view('css', 'css', cache_max_age=3600)
     config.add_static_view('js', 'js', cache_max_age=3600)
     config.add_static_view('fonts', 'fonts', cache_max_age=3600)
+    config.add_static_view('img', 'img', cache_max_age=3600)
 
     config.set_root_factory("apartmentality.views:RootResource")
 

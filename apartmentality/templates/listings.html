@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}It's the lease you can do{% endblock %}
+
+{% block page_content %}
+<section class="bg-primary">
+    <div class="container">
+        <div class="row">
+            {% for result in results %}
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="/img/house-{{ result.id % 10 }}.jpg"
+                         alt="...">
+
+                    <div class="caption">
+                        <h3>{{result.street_address}} {{result
+                            .street_name}}, {{result.city}}, {{result
+                            .state}} {{result.zip}}</h3>
+
+                        <p>...</p>
+
+                        <p><a href="/properties/{{result.id}}"
+                              class="btn btn-primary" role="button">Read
+                            reviews</a> <a href="/properties/{{result.id}}" class="btn btn-default"
+                                           role="button">Rate</a></p>
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+
+
+{% endblock %}

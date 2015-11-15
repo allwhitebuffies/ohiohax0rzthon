@@ -4,6 +4,7 @@
 {% block page_content %}
 
 <h1>{{ manager.name }}</h1>
+<h2>Average Rating: {{ average|round(1) }}</h2>
 
 <ul>
     {% for property in properties %}
