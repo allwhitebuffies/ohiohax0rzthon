@@ -74,6 +74,29 @@ def api_property_search(context, request):
     return list(q.all())
 
 
+@view_config(context=PropertyDispatcher, containment=APIResource,
+             request_method="POST", renderer="api")
+def api_create_property(context, request):
+    street_info = request.json_body.get("address")
+    city = request.json_body.get("city")
+    state = request.json_body.get("state")
+    zip = request.json_body.get("zip")
+
+    num, sep, street = street_info.partition(" ")
+
+    property = Property()
+    property.street_number = int(num)
+    property.street_name = street
+    property.city = city
+    property.state = state
+    property.zip = int(zip)
+
+    DBSession.add(property)
+    DBSession.flush()
+
+    return property
+
+
 @view_config(context=PropertyResource, containment=APIResource,
              request_method="GET", renderer="api")
 def api_property(context, request):
