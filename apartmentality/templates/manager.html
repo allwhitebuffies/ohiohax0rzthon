@@ -2,20 +2,32 @@
 
 {% block title %}View By Manager - {{ manager.name }}{% endblock %}
 {% block page_content %}
-<title>{{ manager.name }} properties</title>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <h1>{{manager.name}}</h1>
+                <h2>Average Rating: {{ average|round(1) }}</h2>
+            </div>
+        </div>
 
-<h1>{{ manager.name }}</h1>
-<h2>Average Rating: {{ average|round(1) }}</h2>
-
-<ul>
-    {% for property in properties %}
-    <li>
-        <a href="/properties/{{ property.id }}">{{ property.street_number }} {{
-            property.street_name }}, {{
-            property.city }}, {{ property.state }} {{ property.zip }}
-        </a>
-    </li>
-    {% endfor %}
-</ul>
+        <div class="row">
+            <div class="col-sm-8">
+                <table class="table table-striped">
+                    {% for property in properties %}
+                    <tr>
+                        <td>
+                            <a href="/properties/{{ property.id }}">{{ property.street_number }} {{
+                                property.street_name }}, {{
+                                property.city }}, {{ property.state }} {{ property.zip }}
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
 
 {% endblock %}
