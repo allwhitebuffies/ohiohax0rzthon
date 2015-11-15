@@ -5,8 +5,9 @@
 {% block page_content %}
 
 <section class="bg-primary">
-    <div class="container" >
-        <div class=""row><h1>{{property.street_number}} {{property.street_name}}</h1></div>
+    <div class="container">
+        <div class="" row><h1>{{property.street_number}}
+            {{property.street_name}}</h1></div>
         <div class="row">
             <div class="col-sm-6 col-md-4">
                 <div class="thumbnail">
@@ -15,24 +16,194 @@
             </div>
             {% for review in reviews %}
             <div class="col-sm-6 col-md-4">
-                    <table>
-                        <tr><td>User: </td><td>{{ review.user.person.first_name }}</td> </tr>
-                        <tr><td>Bedrooms:</td> <td>{{ review.rating_bedroom }} </td> </tr>
-                        <tr><td>Bathroom: </td><td>{{ review.rating_bathroom }} </td></tr>
-                        <tr><td>Kitchen: </td><td>{{ review.rating_kitchen }} </td> </tr>
-                        <tr><td>Area: </td><td>{{ review.rating_area }} </td> </tr>
-                        <tr><td>Average: </td><td>{{ review.rating_average }}</td>  </tr>
-                        <tr><td>Manager: </td><td><a
-                            href="/managers/{{review.manager_id}}">{{ review.manager.name
-                        }}</a> </td></tr>
-                        </table>
+                <table>
+                    <tr>
+                        <td>User:&nbsp;&nbsp;&nbsp;</td>
+                        <td>{{
+                            review.user.person.first_name }}
+                        </td>
+                    </tr>
+                    {% if review.rating_bedroom is not none %}
+                    <tr>
+
+                        <td>Bedrooms:&nbsp;</td>
+                        <td>
+                            {% for i in range(0, review.rating_bedroom)
+                            %}<i class="glyphicon glyphicon-star"></i>{%
+                            endfor %}{% for i in range(0, 5 -
+                            review.rating_bedroom)
+                            %}<i class="glyphicon glyphicon-star - empty"></i>{%
+                            endfor %}
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% if review.rating_bathroom is not none %}
+                    <tr>
+                        <td>Bathroom:&nbsp;&nbsp;</td>
+                        <td>
+                            {% for i in range(0, review.rating_bathroom)
+                            %}<i class="glyphicon glyphicon-star"></i>{%
+                            endfor %}{% for i in range(0, 5 -
+                            review.rating_bathroom)
+                            %}<i class="glyphicon glyphicon-star - empty"></i>{%
+                            endfor %}
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% if review.rating_kitchen is not none %}
+                    <tr>
+                        <td>Kitchen:&nbsp;&nbsp;</td>
+                        <td>
+                            {% for i in range(0, review.rating_kitchen)
+                            %}<i class="glyphicon glyphicon-star"></i>{%
+                            endfor %}{% for i in range(0, 5 -
+                            review.rating_kitchen)
+                            %}<i class="glyphicon glyphicon-star-empty"></i>{%
+                            endfor %}
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% if review.rating_area is not none %}
+                    <tr>
+                        <td>Area:&nbsp;&nbsp;</td>
+                        <td>
+                            {% for i in range(0, review.rating_area)
+                            %}<i class="glyphicon glyphicon-star"></i>{%
+                            endfor %}{% for i in range(0, 5 -
+                            review.rating_area)
+                            %}<i class="glyphicon glyphicon-star-empty"></i>{%
+                            endfor %}
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% if review.rating_average is not none %}
+                    <tr>
+                        <td>Average:&nbsp;&nbsp;</td>
+                        <td>
+                            {% for i in range(0, review.rating_average)
+                            %}<i class="glyphicon glyphicon-star"></i>{%
+                            endfor %}{% for i in range(0, 5 -
+                            review.rating_average)
+                            %}<i class="glyphicon glyphicon-star-empty"></i>{%
+                            endfor %}
+                        </td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <td>Manager:&nbsp;&nbsp;</td>
+                        <td>
+                            <a href="/managers/{{review.manager_id}}">{{
+                                review.manager.name
+                                }}
+                        </td>
+                    </tr>
+                </table>
                 <br/>
                 {{review.text}}
             </div>
             {% endfor %}
         </div>
+        <div class="row">
+            <table class="col-sm-12">
+                <tr>
+                    <td>Bedroom</td>
+                    <td><input type="number"
+                               id="rating_bedroom"
+                               class="rating"/></td>
+                </tr>
+                <tr>
+                    <td>Bathroom</td>
+                    <td><input type="number" id="rating_bathroom"
+                               class="rating"/></td>
+                </tr>
+                <tr>
+                    <td>Kitchen</td>
+                    <td><input type="number"
+                               id="rating_kitchen"
+                               class="rating"/></td>
+                </tr>
+                <tr>
+                    <td>Area</td>
+                    <td><input type="number" id="rating_area"
+                               class="rating"/></td>
+                </tr>
+                <!--<input type="text" id="rent"/>-->
+                <tr>
+                    <td>Manager</td>
+                    <td><input type="text" id="manager"/></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <textarea id="comment"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="file" id="file"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button class="submitBtn">Post</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
+        <script>
+    var propertyId = "{{property.id}}";
+    document.addEventListener("click", function(e) {
+        if (e.target.className.indexOf("submitBtn") != -1) {
+            var rating_bedroom = $("#rating_bedroom").val();
+            var rating_bathroom = $("#rating_bathroom").val();
+            var rating_kitchen = $("#rating_kitchen").val();
+            var rating_area = $("#rating_area").val();
+            var manager = $("#manager").val();
+
+            var text = $("#comment").val()
+
+            var data = {
+                manager: manager,
+                rating_kitchen: rating_kitchen,
+                rating_bathroom: rating_bathroom,
+                rating_bedroom: rating_bedroom,
+                rating_area: rating_area,
+                rent: $("#rent").val(),
+                text: text,
+                tag_ids: []
+            };
+
+            $.ajax({
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                dataType: "json",
+                success: function(data) {
+                    location.href = "/properties/" + propertyId;
+                },
+                processData: false,
+                type: "POST",
+                url: "/api/properties/" + propertyId + "/reviews"
+            });
+
+        }
+    });
+
+
+
+
+
+
+
+
+
+
+        </script>
     </div>
 </section>
 
+{% endblock %}
+
+{% block end_scripts %}
+<script src="/js/bootstrap-rating-input.min.js" type="text/javascript">
+</script>
 {% endblock %}
