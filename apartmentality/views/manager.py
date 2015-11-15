@@ -64,4 +64,4 @@ def api_manager(context, request):
 @view_config(context=ManagerResource, request_method="GET",
              renderer="manager.html")
 def html_manager(context, request):
-    return api_manager(context, request)
+    return {"data": api_manager(context, request)}

@@ -21,6 +21,10 @@ class RootResource(Resource):
         super().__init__(request)
         self.children = {
             "api": APIResource,
+            "users": UserDispatcher,
+            "properties": PropertyDispatcher,
+            "managers": ManagerDispatcher,
+            "tags": TagDispatcher,
         }
 
 

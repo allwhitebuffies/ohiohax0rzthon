@@ -107,7 +107,7 @@ def api_property(context, request):
 
     property = q.one()
 
-    q = DBSession.query(Tag.name, func.count(Tag.id))
+    q = DBSession.query(Tag.text, func.count(Tag.id))
     q = q.select_from(Review)
     q = q.join(Review.tags)
     q = q.filter(Review.property_id == property.id)
@@ -123,4 +123,4 @@ def api_property(context, request):
 @view_config(context=PropertyResource, request_method="GET",
              renderer="property.html")
 def html_property(context, request):
-    return api_property(context, request)
+    return {"data": api_property(context, request)}
