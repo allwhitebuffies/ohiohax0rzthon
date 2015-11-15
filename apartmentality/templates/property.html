@@ -28,10 +28,10 @@
 </ul>
 
 <div>
-    <input type="text" id="rating_bedroom"/>
-    <input type="text" id="rating_bathroom"/>
-    <input type="text" id="rating_kitchen"/>
-    <input type="text" id="rating_area"/>
+    <input type="number" id="rating_bedroom" class="rating"/>
+    <input type="number" id="rating_bathroom" class="rating"/>
+    <input type="number" id="rating_kitchen" class="rating"/>
+    <input type="number" id="rating_area" class="rating"/>
     <input type="text" id="rent"/>
     <input type="text" id="manager"/>
     <textarea id="comment">
@@ -78,6 +78,14 @@
         }
     });
 
+
+
 </script>
 
+
+{% endblock %}
+
+{% block end_scripts %}
+<script src="/js/bootstrap-rating-input.min.js" type="text/javascript">
+</script>
 {% endblock %}
