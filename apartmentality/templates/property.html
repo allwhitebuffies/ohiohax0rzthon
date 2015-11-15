@@ -71,7 +71,7 @@
                 data: JSON.stringify(data),
                 dataType: "json",
                 success: function(data) {
-                    location.reload();
+                    location.href = "/properties/" + propertyId;
                 },
                 processData: false,
                 type: "POST",
