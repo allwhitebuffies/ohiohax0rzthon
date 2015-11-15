@@ -67,6 +67,8 @@ def api_review_list(context, request):
 
     reviews = q.all()
 
+    print(str(len(reviews)) + " REVIEWS")
+
     return reviews
 
 
