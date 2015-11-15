@@ -27,3 +27,12 @@ class Review(Base):
     user = relationship("User", backref="reviews")
     property = relationship("Property", backref="reviews")
     manager = relationship("Manager", backref="properties")
+
+    tags = relationship("ReviewTag", secondary="review_tags")
+
+
+class ReviewTag(Base):
+    __tablename__ = "review_tags"
+
+    tag_id = Column(ForeignKey("tags.id"), primary_key=True)
+    review_id = Column(ForeignKey("reviews.id"), primary_key=True)
