@@ -41,9 +41,6 @@ from apartmentality.views.manager import ManagerDispatcher
 from apartmentality.views.tag import TagDispatcher
 
 
-@view_config(context=APIResource, request_method="GET", renderer="api")
+@view_config(context=RootResource, request_method="GET", renderer="index.html")
 def api_index(context, request):
-    return {
-        "hello": [1, 2, True, False, None, 2.3, "yay"],
-        "key": {"key": "value"},
-    }
+    return {}
