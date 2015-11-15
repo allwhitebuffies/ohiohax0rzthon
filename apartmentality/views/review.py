@@ -1,11 +1,9 @@
 import datetime
-
 from pyramid.traversal import find_interface
 from pyramid.view import view_config
 from sqlalchemy.orm import eagerload, defaultload
 from sqlalchemy.orm.strategy_options import Load
 from sqlalchemy.sql.functions import func
-
 from apartmentality.database import DBSession
 from apartmentality.models.manager import Manager
 from apartmentality.models.review import Review

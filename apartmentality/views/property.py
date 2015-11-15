@@ -41,7 +41,7 @@ class PropertyResource(Resource):
         self.property_id = id_int
 
 
-from apartmentality.views.review import ReviewDispatcher
+from apartmentality.views.review import ReviewDispatcher, api_review_list
 
 
 @view_config(context=PropertyDispatcher, containment=APIResource,
@@ -123,4 +123,13 @@ def api_property(context, request):
 @view_config(context=PropertyResource, request_method="GET",
              renderer="property.html")
 def html_property(context, request):
-    return {"data": api_property(context, request)}
+    dispatcher = ReviewDispatcher(request)
+    dispatcher.__name__ = "reviews"
+    dispatcher.__parent__ = context
+
+    return {
+        "data": {
+            "property": api_property(context, request),
+            "reviews": api_review_list(dispatcher, request),
+        },
+    }
