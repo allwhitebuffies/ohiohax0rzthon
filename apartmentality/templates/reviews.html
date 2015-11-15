@@ -14,6 +14,15 @@
                     <img src="{{photo}}"/>
                 </div>
             </div>
+            <div class="col-sm-6 col-md-4 panel">
+                  
+                <iframe frameborder="0"
+                        style="border:0; width:90%; min-height: 250px"
+                        src="https://www.google.com/maps/embed/v1/place?q={{property.street_number}}
+                        {{property.street_name}} {{property.city}}
+                        {{property.zip}}&key=AIzaSyB6El3z6ySq6KE_k0TtMYn88btQk5Gz7Y8"
+                        allowfullscreen></iframe> 
+            </div>
             {% for review in reviews %}
             <div class="col-sm-6 col-md-4 panel">
                 <table class="table table-striped">
