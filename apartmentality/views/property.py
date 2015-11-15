@@ -129,7 +129,7 @@ def api_property(context, request):
 
 
 @view_config(context=PropertyResource, request_method="GET",
-             renderer="property.html")
+             renderer="reviews.html")
 def html_property(context, request):
     dispatcher = ReviewDispatcher(request)
     dispatcher.__name__ = "reviews"
