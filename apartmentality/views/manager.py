@@ -44,20 +44,10 @@ def api_manager_list(context, request):
 
     q = DBSession.query(Manager)
 
-    q = q.outerjoin(Manager.company)
-    q = q.outerjoin(Manager.person)
-
     if name is not None:
-        q = q.filter(or_(
-            func.lower(Company.name).like("%%%s%%" % name.lower()),
-            func.lower(Person.last_name).like("%%%s%%" % name.lower()),
-            # TODO: full name search
-        ))
-
-    q = q.options(
-        Load(Manager).contains_eager(Manager.company),
-        Load(Manager).contains_eager(Manager.person),
-    )
+        q = q.filter(
+            func.lower(Manager.name).like("%%%s%%" % name.lower()),
+        )
 
     return list(q.all())
 
@@ -67,10 +57,6 @@ def api_manager_list(context, request):
 def api_manager(context, request):
     q = DBSession.query(Manager)
     q = q.filter(Manager.id == context.manager_id)
-    q = q.options(
-        Load(Manager).joinedload(Manager.company),
-        Load(Manager).joinedload(Manager.person),
-    )
 
     manager = q.one()
 

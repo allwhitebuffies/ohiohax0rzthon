@@ -90,3 +90,23 @@ def api_review(context, request):
     review = q.one()
 
     return review
+
+def api_create_review(context, request):
+    property_id = context.property_id
+    user_id = request.cookies.get("user_id")
+
+
+    q = DBSession.query(Manager)
+    q = q.outerjoin(Manager.company)
+    q = q.outerjoin(Manager.person)
+
+    if name is not None:
+        q = q.filter(or_(
+            func.lower(Company.name).like("%%%s%%" % name.lower()),
+            func.lower(Person.last_name).like("%%%s%%" % name.lower()),
+            # TODO: full name search
+        ))
+
+
+    review = Review()
+    review.property_id = property_id

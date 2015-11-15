@@ -8,15 +8,4 @@ class Manager(Base):
     __tablename__ = "managers"
 
     id = Column(Integer, primary_key=True)
-    phone = Column(String(50))
-    street_number = Column(Integer)
-    street_name = Column(String(50))
-    city = Column(String(50))
-    state = Column(String(50))
-    zip = Column(Integer)
-
-    company_id = Column(ForeignKey("companies.id"))
-    person_id = Column(ForeignKey("people.id"))
-
-    company = relationship("Company")
-    person = relationship("Person")
+    name = Column(String(50), index=True)
