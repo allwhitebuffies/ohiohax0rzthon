@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}It's the lease you can do{% endblock %}
+
+{% block page_content %}
+
+<section class="bg-primary">
+    <div class="container" >
+        <div class=""row><h1>{{property.street_number}} {{property.street_name}}</h1></div>
+        <div class="row">
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="{{photo}}"/>
+                </div>
+            </div>
+            {% for review in reviews %
+            <div class="col-sm-6 col-md-4">
+                    <table>
+                        <tr><td>User: </td><td>{{ review.user.person.first_name }}</td> </tr>
+                        <tr><td>Bedrooms:</td> <td>{{ review.rating_bedroom }} </td> </tr>
+                        <tr><td>Bathroom: </td><td>{{ review.rating_bathroom }} </td></tr>
+                        <tr><td>Kitchen: </td><td>{{ review.rating_kitchen }} </td> </tr>
+                        <tr><td>Area: </td><td>{{ review.rating_area }} </td> </tr>
+                        <tr><td>Average: </td><td>{{ review.rating_average }}</td>  </tr>
+                        <tr><td>Manager: </td><td><a
+                            href="/managers/{{review.manager_id}}">{{ review.manager.name
+                        }}</a> </td></tr>
+                        </table>
+                <br/>
+                {{review.text}}
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

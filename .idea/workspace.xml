@@ -2,6 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a02a956c-d030-4d0e-a8ce-ac2ad45ec407" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apartmentality/templates/base.html" afterPath="$PROJECT_DIR$/apartmentality/templates/base.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apartmentality/templates/index.html" afterPath="$PROJECT_DIR$/apartmentality/templates/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apartmentality/templates/listings.html" afterPath="$PROJECT_DIR$/apartmentality/templates/listings.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apartmentality/templates/manager.html" afterPath="$PROJECT_DIR$/apartmentality/templates/manager.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apartmentality/templates/property.html" afterPath="$PROJECT_DIR$/apartmentality/templates/property.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apartmentality/templates/reviews.html" afterPath="$PROJECT_DIR$/apartmentality/templates/reviews.html" />
     </list>
     <ignored path="ohiohax0rzthon.iws" />
@@ -25,18 +31,58 @@
       <file leaf-file-name="property.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apartmentality/templates/property.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.333333">
-              <caret line="29" column="7" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="16" />
+            <state vertical-scroll-proportion="-4.6666665">
+              <caret line="10" column="58" selection-start-line="10" selection-start-column="58" selection-end-line="10" selection-end-column="58" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="reviews.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="reviews.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apartmentality/templates/reviews.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6602871">
-              <caret line="23" column="80" selection-start-line="23" selection-start-column="80" selection-end-line="23" selection-end-column="80" />
+            <state vertical-scroll-proportion="-6.0">
+              <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/apartmentality/templates/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.28708133">
+              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apartmentality/templates/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.3333333">
+              <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="listings.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apartmentality/templates/listings.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.3333333">
+              <caret line="5" column="52" selection-start-line="5" selection-start-column="52" selection-end-line="5" selection-end-column="52" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="manager.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apartmentality/templates/manager.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-2.6666667">
+              <caret line="4" column="3" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -50,14 +96,18 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/apartmentality/templates/base.html" />
+        <option value="$PROJECT_DIR$/apartmentality/templates/index.html" />
+        <option value="$PROJECT_DIR$/apartmentality/templates/listings.html" />
+        <option value="$PROJECT_DIR$/apartmentality/templates/manager.html" />
         <option value="$PROJECT_DIR$/apartmentality/templates/property.html" />
         <option value="$PROJECT_DIR$/apartmentality/templates/reviews.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="911" />
-    <option name="y" value="164" />
+    <option name="x" value="995" />
+    <option name="y" value="284" />
     <option name="width" value="925" />
     <option name="height" value="796" />
   </component>
@@ -270,10 +320,10 @@
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="ToolWindowManager">
-    <frame x="911" y="164" width="925" height="796" extended-state="0" />
+    <frame x="995" y="284" width="925" height="796" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.112097666" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42175362" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -297,18 +347,50 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/apartmentality/templates/property.html">
+    <entry file="file://$PROJECT_DIR$/apartmentality/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.333333">
-          <caret line="29" column="7" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="16" />
+        <state vertical-scroll-proportion="-3.3333333">
+          <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apartmentality/templates/listings.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.3333333">
+          <caret line="5" column="52" selection-start-line="5" selection-start-column="52" selection-end-line="5" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apartmentality/templates/manager.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.6666667">
+          <caret line="4" column="3" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="44" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apartmentality/templates/reviews.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6602871">
-          <caret line="23" column="80" selection-start-line="23" selection-start-column="80" selection-end-line="23" selection-end-column="80" />
+        <state vertical-scroll-proportion="-6.0">
+          <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apartmentality/templates/property.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.6666665">
+          <caret line="10" column="58" selection-start-line="10" selection-start-column="58" selection-end-line="10" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apartmentality/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28708133">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
       </provider>

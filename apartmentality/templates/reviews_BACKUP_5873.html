@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}It's the lease you can do{% endblock %}
+
+{% block page_content %}
+<<<<<<< HEAD
+
+<section class="bg-primary">
+    <div class="container" >
+        <div class=""row><h1>{{property.street_number}} {{property.street_name}}</h1></div>
+        <div class="row">
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="{{photo}}"/>
+                </div>
+            </div>
+            {% for review in reviews %
+            <div class="col-sm-6 col-md-4">
+                    <table>
+                        <tr><td>User: </td><td>{{ review.user.person.first_name }}</td> </tr>
+                        <tr><td>Bedrooms:</td> <td>{{ review.rating_bedroom }} </td> </tr>
+                        <tr><td>Bathroom: </td><td>{{ review.rating_bathroom }} </td></tr>
+                        <tr><td>Kitchen: </td><td>{{ review.rating_kitchen }} </td> </tr>
+                        <tr><td>Area: </td><td>{{ review.rating_area }} </td> </tr>
+                        <tr><td>Average: </td><td>{{ review.rating_average }}</td>  </tr>
+                        <tr><td>Manager: </td><td><a
+                            href="/managers/{{review.manager_id}}">{{ review.manager.name
+                        }}</a> </td></tr>
+                        </table>
+                <br/>
+                {{review.text}}
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+=======
+<section class="bg-primary">
+    <div class="container">
+        <div class="row">
+            <section>
+                <h1>6069 Northbend Dr.</h1>
+
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <img src="http://cdn.playbuzz.com/cdn/0079c830-3406-4c05-a5c1-bc43e8f01479/7dd84d70-768b-492b-88f7-a6c70f2db2e9.jpg"
+                             alt="...">
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Aenean scelerisque neque quis ante dapibus, in
+                            bibendum nisi commodo. Donec fermentum neque sit
+                            amet nisi faucibus, quis dignissim arcu euismod. In
+                            sodales diam dapibus nisl scelerisque eleifend.
+                            Interdum et malesuada fames ac ante ipsum primis in
+                            faucibus. Praesent at nulla in justo ullamcorper
+                            dictum sit amet at felis. Integer ipsum risus,
+                            sagittis sed turpis ac, tempus iaculis urna. Quisque
+                            viverra pulvinar dolor, nec sodales lectus congue
+                            tempor. Phasellus tristique felis velit, nec
+                            fermentum dui vehicula venenatis. Sed in urna vel
+                            eros ultrices sollicitudin. Duis cursus at mi semper
+                            molestie. Duis molestie, purus eu mollis viverra,
+                            nulla nisi dapibus nibh, in mollis nulla tortor at
+                            metus. Suspendisse tempor sem sit amet placerat
+                            lacinia. Fusce et augue felis.</p></div>
+
+
+            </section>
+
+
+        </div>
+>>>>>>> db41e25cf0f1f20e96c474fe6e0684ba89e05e0e
+</section>
+
+{% endblock %}
