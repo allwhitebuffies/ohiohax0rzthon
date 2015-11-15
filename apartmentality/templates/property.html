@@ -12,7 +12,15 @@
 <ul>
     {% for review in reviews %}
     <li>
-        {{ review.user.person.first_name }}
+        User: {{ review.user.person.first_name }} <br/>
+        Bedrooms: {{ review.rating_bedroom }} <br/>
+        Bathroom: {{ review.rating_bathroom }} <br/>
+        Kitchen: {{ review.rating_kitchen }} <br/>
+        Area: {{ review.rating_area }} <br/>
+        Average: {{ review.rating_average }} <br/>
+        Manager: <a
+            href="/managers/{{review.manager_id}}">{{ review.manager.name
+        }}</a>
     </li>
     {% endfor %}
 </ul>

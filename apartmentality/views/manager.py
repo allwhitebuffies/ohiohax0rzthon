@@ -72,7 +72,24 @@ def html_manager(context, request):
 
     properties = q.distinct()
 
+    q = DBSession.query(Review.rating_average)
+    q = q.filter(Review.manager_id == context.manager_id)
+
+    r_sum = 0
+    r_total = 0
+
+    for row in q.all():
+        if row[0] is not None:
+            r_sum += row[0]
+            r_total += 1
+
+    if r_total > 0:
+        average = r_sum / r_total
+    else:
+        average = None
+
     return {
         "manager": api_manager(context, request),
         "properties": properties,
+        "average": average,
     }
