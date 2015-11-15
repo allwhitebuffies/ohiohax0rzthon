@@ -25,4 +25,56 @@
     {% endfor %}
 </ul>
 
+<div>
+    <input type="text" id="rating_bedroom"/>
+    <input type="text" id="rating_bathroom"/>
+    <input type="text" id="rating_kitchen"/>
+    <input type="text" id="rating_area"/>
+    <input type="text" id="rent"/>
+    <input type="text" id="manager"/>
+    <textarea id="comment">
+
+    </textarea>
+    <input type="file" id="file"/>
+    <button class="submitBtn">Post</button>
+</div>
+
+<script>
+    var propertyId = "{{property.id}}";
+    document.addEventListener("click", function(e) {
+        if (e.target.className.indexOf("submitBtn") != -1) {
+            var rating_bedroom = $("#rating_bedroom").val();
+            var rating_bathroom = $("#rating_bathroom").val();
+            var rating_kitchen = $("#rating_kitchen").val();
+            var rating_area = $("#rating_area").val();
+            var manager = $("#manager").val();
+
+            var text = $("#comment").html()
+
+            var data = {
+                manager: manager,
+                rating_kitchen: rating_kitchen,
+                rating_bathroom: rating_bathroom,
+                rating_bedroom: rating_bedroom,
+                rating_area: rating_area,
+                rent: $("#rent").val(),
+                tag_ids: []
+            };
+
+            $.ajax({
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                dataType: "json",
+                success: function(data) {
+                },
+                processData: false,
+                type: "POST",
+                url: "/api/properties/" + propertyId + "/reviews"
+            });
+
+        }
+    });
+
+</script>
+
 {% endblock %}
