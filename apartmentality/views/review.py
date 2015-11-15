@@ -95,16 +95,16 @@ def api_review(context, request):
 @view_config(context=ReviewDispatcher, containment=APIResource,
              request_method="POST", renderer="api")
 def api_create_review(context, request):
-    property_id = context.property_id
-    user_id = request.cookies.get("user_id")
+    property_id = context.__parent__.property_id
+    user_id = request.cookies.get("user_id", 1)
 
-    manager = request.json_body.get("manager")
-    rating_kitchen = request.json_body.get("rating_kitchen")
-    rating_bedroom = request.json_body.get("rating_bedroom")
-    rating_bathroom = request.json_body.get("rating_bathroom")
-    rating_area = request.json_body.get("rating_area")
+    manager_name = request.json_body.get("manager")
+    rating_kitchen = int(request.json_body.get("rating_kitchen"))
+    rating_bedroom = int(request.json_body.get("rating_bedroom"))
+    rating_bathroom = int(request.json_body.get("rating_bathroom"))
+    rating_area = int(request.json_body.get("rating_area"))
     rent = request.json_body.get("rent")
-    tag_ids = request.json_body.get("tags")
+    tag_ids = request.json_body.get("tag_ids")
 
     avg_sum = 0
     avg_total = 0
@@ -130,13 +130,13 @@ def api_create_review(context, request):
     text = request.json_body.get("text")
 
     q = DBSession.query(Manager)
-    q = q.filter(func.lower(Manager.name).like("%%%s%%" % manager.lower()))
+    q = q.filter(func.lower(Manager.name).like("%%%s%%" % manager_name.lower()))
 
     manager = q.scalar()
 
     if manager is None:
         manager = Manager()
-        manager.name = manager
+        manager.name = manager_name
         DBSession.add(manager)
         DBSession.flush()
 

@@ -130,4 +130,5 @@ def html_property(context, request):
     return {
         "property": api_property(context, request),
         "reviews": api_review_list(dispatcher, request),
+        "photo": "/img/house-%d.jpg" % (context.property_id % 10),
     }

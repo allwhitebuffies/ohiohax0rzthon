@@ -36,6 +36,7 @@ class APIResource(Resource):
             "properties": PropertyDispatcher,
             "managers": ManagerDispatcher,
             "tags": TagDispatcher,
+            "photos": PhotoDispatcher,
         }
 
 
@@ -43,6 +44,7 @@ from apartmentality.views.user import UserDispatcher
 from apartmentality.views.property import PropertyDispatcher
 from apartmentality.views.manager import ManagerDispatcher
 from apartmentality.views.tag import TagDispatcher
+from apartmentality.views.photo import PhotoDispatcher
 
 
 @view_config(context=RootResource, request_method="GET", renderer="index.html")
