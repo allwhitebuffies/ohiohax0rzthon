@@ -16,6 +16,9 @@ def main(global_config, **settings):
     configure_database(settings["sqlalchemy.url"])
 
     config.add_static_view('static', 'static', cache_max_age=3600)
+    config.add_static_view('css', 'css', cache_max_age=3600)
+    config.add_static_view('js', 'js', cache_max_age=3600)
+    config.add_static_view('fonts', 'fonts', cache_max_age=3600)
 
     config.set_root_factory("apartmentality.views:RootResource")
 
