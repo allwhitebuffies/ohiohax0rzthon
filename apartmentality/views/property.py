@@ -76,6 +76,14 @@ def api_property_search(context, request):
     return list(q.all())
 
 
+@view_config(context=PropertyDispatcher, request_method="GET",
+             renderer="listings.html")
+def html_property_search(context, request):
+    data = api_property_search(context, request)
+
+    return {"results": data}
+
+
 @view_config(context=PropertyDispatcher, containment=APIResource,
              request_method="POST", renderer="api")
 def api_create_property(context, request):
